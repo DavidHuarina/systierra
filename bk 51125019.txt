@@ -1,0 +1,34 @@
+-- View: public.v_datos_usuario
+
+-- DROP VIEW public.v_datos_usuario;
+
+CREATE OR REPLACE VIEW public.v_datos_usuario AS
+ SELECT u.id_rol,
+    p.id_cargo,
+    p.id_usuario,
+    p.id_persona,
+    p.direccion,
+    u.sobre_mi,
+    p.numero_ci,
+    p.nombre_persona,
+    p.apellido_persona,
+    p.telefono,
+    p.correo,
+    p.fecha_nacimiento,
+    p.fecha_contratacion,
+    u.usuario,
+    u.contrasena,
+    u.dir_imagen,
+    u.online,
+    c.nombre_cargo,
+    c.salario,
+    r.descripcion
+   FROM personal p
+     JOIN usuario u USING (id_usuario)
+     JOIN cargo c USING (id_cargo)
+     JOIN rol r USING (id_rol)
+  ORDER BY u.usuario;
+
+ALTER TABLE public.v_datos_usuario
+    OWNER TO postgres;
+

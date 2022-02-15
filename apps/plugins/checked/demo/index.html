@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery checkboxAll: Select All Checkboxes Demos</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet">
+<style>
+	html, body { margin:0; padding:0; }
+	.demo > div { padding:3px 0; }
+    .container { margin:150px auto;}
+</style>
+</head>
+
+<body>
+  <div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/form/Select-All-Checkboxes-jQuery-checkboxAll.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+	<div class="demo container">
+		<h1>jQuery checkboxAll: Select All Checkboxes Demos</h1>
+		<h1>Example 1</h1>
+		<h3>Default settings</h3>
+		<div class="example1">
+			<div><input type="checkbox" name="selectall1" id="selectall1" class="all" value="1"> <label for="selectall1">Select all</label></div>
+			<div><input type="checkbox" name="check[]" id="check1" value="1"> <label for="check1">1. checkbox</label></div>
+			<div><input type="checkbox" name="check[]" id="check2" value="2"> <label for="check2">2. checkbox</label></div>
+			<div><input type="checkbox" name="check[]" id="check3" value="3"> <label for="check3">3. checkbox</label></div>
+			<div><input type="checkbox" name="check[]" id="check4" value="4"> <label for="check4">4. checkbox</label></div>
+		</div>
+
+		<h1>Example 2</h1>
+		<h3>With optional class name</h3>
+		<div class="example2">
+			<div><input type="checkbox" name="selectall2" id="selectall2" class="optionalclassname" value="1"> <label for="selectall2">Select all</label></div>
+			<div><input type="checkbox" name="check[]" id="check5" value="1"> <label for="check5">1. checkbox</label></div>
+			<div><input type="checkbox" name="check[]" id="check6" value="2"> <label for="check6">2. checkbox</label></div>
+			<div><input type="checkbox" name="check[]" id="check7" value="3"> <label for="check7">3. checkbox</label></div>
+			<div><input type="checkbox" name="check[]" id="check8" value="4"> <label for="check8">4. checkbox</label></div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="../jquery.checkboxall-1.0.min.js"></script>
+	<script>
+		$('.example1').checkboxall();
+		$('.example2').checkboxall('optionalclassname');
+	</script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
