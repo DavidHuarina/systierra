@@ -82,7 +82,10 @@
                           # code...
                           break;
                       }
+                   
+
                    $personaU=$this->personal->getAllIdUsuario($act->act_resp);
+                   if(!(!isset($personaU)||$personaU==null)){
                   $end = strtotime ( '+'.$act->act_dias.' day' , strtotime ($act->act_fecha)) ;
                   $end=strftime('%Y-%m-%d',$end);
                     $porciones = explode("@", $act->sub_nom);
@@ -94,6 +97,10 @@
                           description: 'Proyecto: ".$porcionesProy[0]." / Duración: ".$act->act_dias." / Creado por: #".$personaU->nombre_persona." / (".$eresP.")',
                           url: '#',
                           color:'".$color."'});</script>";
+                      
+                   }
+                   
+
                 }
                /* foreach ($actividadIn->result() as $acti) {
                  $idper=$this->personal->getByIdUsuario($this->session->userdata('id_usuario_sesion'));
