@@ -28,7 +28,7 @@ if($ip=="::1"){
 	$ip="localhost";
 }
 
-$config['base_url'] = 'http://'.$ip.'/inftierra/';
+$config['base_url'] = 'http://'.$ip.'/systierra/';
 /*
 |--------------------------------------------------------------------------
 | Index File

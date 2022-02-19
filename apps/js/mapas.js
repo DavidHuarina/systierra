@@ -1,7 +1,7 @@
 /*INICIAR MAPA */
-var mymap = L.map('mapid').setView([-17.500919, -64.775806], 5);
+var mymap = L.map('mapid').setView([-17.500919, -64.775806], 18);
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=sk.eyJ1IjoiZGF2aWRodWFyaW5hMjUiLCJhIjoiY2pzeXBlaHZoMTVqNTQ5b2IyaWdqM3ZtOCJ9._57pleihDl8BVxaEeB9B0g', {
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: 'SysTierra',
         id: 'mapbox.streets'
