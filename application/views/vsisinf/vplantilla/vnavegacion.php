@@ -280,6 +280,55 @@
            
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="now-ui-icons design_bullet-list-67"></i>
+                  <p>
+                    <span class="d-lg-none d-md-block">Menu</span>
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+
+
+
+                  <?php 
+           if($idrol!=3000){
+              if($idrol==1000){
+
+              }else{
+                    ?>
+                    <a href="clista_actividad_me"class="dropdown-item"><i class="now-ui-icons arrows-1_minimal-right text-primary"></i> Actividades</a>
+                    <?php if($idrol==2000){
+                    ?>
+                    <a href="csolicitudes_me"class="dropdown-item"><i class="now-ui-icons arrows-1_minimal-right text-primary"></i> Solicitudes</a>
+                    <a href="cdescargos_me"class="dropdown-item"><i class="now-ui-icons arrows-1_minimal-right text-primary"></i> Descargos</a>
+                        <?php
+                       }
+                   }
+              }
+          ?>         
+        <?php 
+        if($idrol==5000||$idrol==3000||$idrol==4000){
+              
+                   ?>  
+               <a href="csolicitudes"class="dropdown-item"><i class="now-ui-icons arrows-1_minimal-right text-primary"></i> Solicitudes</a>
+               <a href="cdescargos"class="dropdown-item"><i class="now-ui-icons arrows-1_minimal-right text-primary"></i> Descargos</a>
+               <a href="creembolso"class="dropdown-item"><i class="now-ui-icons arrows-1_minimal-right text-primary"></i> Reembolsos</a>
+               <a href="creportes"class="dropdown-item"><i class="now-ui-icons arrows-1_minimal-right text-primary"></i> Reportes</a>            
+                <?php
+                if($idrol==3000){
+                  ?>
+                  <?php
+              }else{
+                 ?>
+                 <a href="clista_proyecto"class="dropdown-item"><i class="now-ui-icons arrows-1_minimal-right text-primary"></i> Proyectos</a>            
+                  <?php 
+               }
+         }
+          ?>
+                   
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="now-ui-icons users_single-02"></i>
                   <p>
                     <span class="d-lg-none d-md-block"><?=$nombreUsuario?></span>

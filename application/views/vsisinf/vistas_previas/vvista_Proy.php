@@ -16,7 +16,7 @@
   <footer>
   <center><label id="footer_texto">La Paz,  <?=strftime('%d de %B de %Y',time())?></label></center><!--<img class="logo-pie" src="imagenes/logo_tierra1.png">-->   
   </footer>
-<div id="header_titulo_texto">TIERRA<br>
+<div id="header_titulo_texto" style="width:85% !important">TIERRA<br>
   "<?=$proy->nombre_proyecto?>"<br> DATOS GENERALES DEL PROYECTO 
 </div>
 <div class="content">

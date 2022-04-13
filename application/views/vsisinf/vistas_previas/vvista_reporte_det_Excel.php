@@ -33,7 +33,7 @@ header('Content-Disposition: attachment; filename=reporte.xls');
   <center><label id="footer_texto"><?=$ciudad?>,  <?=strftime('%d de %B de %Y',time())?></label></center><!--<img class="logo-pie" src="imagenes/logo_tierra1.png">-->   
   </footer>
 
-  <div id="header_titulo_texto" style="color:#494f4a; font-size:35px;">TIERRA<br>
+  <div id="header_titulo_texto" style="color:#494f4a; font-size:35px;width:87% !important;">TIERRA<br>
   "<?=utf8_decode($proy->nombre_proyecto)?>"<br> REPORTES / PRESUPUESTO
 </div>
 <br><br><br>

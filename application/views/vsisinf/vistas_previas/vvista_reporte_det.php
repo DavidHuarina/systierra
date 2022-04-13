@@ -40,7 +40,7 @@ setlocale(LC_TIME, "Spanish");
   <footer>
   <center><label id="footer_texto"><?=$ciudad?>,  <?=strftime('%d de %B de %Y',time())?></label></center><!--<img class="logo-pie" src="imagenes/logo_tierra1.png">-->   
   </footer>
-  <div id="header_titulo_texto">TIERRA<br>
+  <div id="header_titulo_texto" style="width:87% !important;">TIERRA<br>
   "<?=$proy->nombre_proyecto?>"<br> REPORTES / PRESUPUESTO
 </div>
 <div class="content">

@@ -1,6 +1,6 @@
 body{font-family:  sans-serif; font-size: 10px;}
 .solImp{font-family:  sans-serif; font-size: 11px;}
-@page { margin-top: 40px; margin-left: 15px; margin-right: 40px; margin-bottom: 40px;}
+@page { margin-top: 40px; margin-left: 40px; margin-right: 40px; margin-bottom: 40px;}
 header { position: fixed; top: -10px; left: 0px; right: 0px; height: 70px;}
 footer { position: fixed; bottom: -130px; left: 0px; right: 0px; height: 50px; }
 
@@ -58,8 +58,8 @@ width: 100%;
 	text-align: center;
 }
 .cont{
-padding-right: 35px;
-padding-left: 80px;	
+padding-right: 10px;
+padding-left: 20px;	
 }
 .cont_des{
 	padding-top: 40px;

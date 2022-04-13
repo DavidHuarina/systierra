@@ -69,11 +69,17 @@
                                      <img class='icon-sm' src='apps/full-icon/flat/negocio/atm.png' alt='Sin imagen'> <small>Agregar presupuesto</small></a>";
                                    }else{
                               ?>
-                              <a class="dropdown-item " href="cnueva_actividad?id=<?=$proy->id_proyecto?>&fa=none&p=0">
-                              <img class='icon-sm' src='apps/full-icon/flat/oficina/clipboard.png' alt='Sin imagen'> <small>Nueva Actividad</small></a>
-                              
-                              <a class="dropdown-item" href="clista_actividad_proy?id=<?=$proy->id_proyecto?>">
-                              <img class='icon-sm' src='apps/full-icon/flat/iconos-sys/attachment.png' alt='Sin imagen'> <small>Ver Actividades</small></a>
+                              <!-- <a class="dropdown-item " href="cnueva_actividad?id=<?=$proy->id_proyecto?>&fa=none&p=0">
+                              <img class='icon-sm' src='apps/full-icon/flat/oficina/clipboard.png' alt='Sin imagen'> <small>Nueva Actividad</small></a> -->
+                              <a class="dropdown-item" href="cvista_Proy?id=<?=$proy->id_proyecto?>">
+                              <img class='icon-sm' src='apps/full-icon/flat/essencial/layers-1.png' alt='Sin imagen'> <small>Datos Generales</small></a>
+                              <a class="dropdown-item" href="cfulldetalles?id=<?=$proy->id_proyecto?>">
+                              <img class='icon-sm' src='apps/full-icon/flat/oficina/analytics-4.png' alt='Sin imagen'> <small>Presupuesto</small></a>
+
+
+
+                              <!-- <a class="dropdown-item" href="clista_actividad_proy?id=<?=$proy->id_proyecto?>">
+                              <img class='icon-sm' src='apps/full-icon/flat/iconos-sys/attachment.png' alt='Sin imagen'> <small>Ver Actividades</small></a> -->
                               <div class="dropdown-divider"></div>
                                   <?php
                                    }

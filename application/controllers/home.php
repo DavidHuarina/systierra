@@ -22,17 +22,31 @@ class Home extends C_datos {
 		$datosUsuario+=$this->completarDatos();
 		$this->load->view('vsisinf/vplantilla/vbarralateral',$datosUsuario);
 		$this->load->view('vsisinf/vplantilla/vnavegacion');
-		$this->load->view('vsisinf/vplantilla/vpanelhome');
+		// $this->load->view('vsisinf/vplantilla/vpanelhome');
+		$this->load->view('vsisinf/solicitud/vsolicitud_me');
 		$this->load->view('vsisinf/vplantilla/vfooter');
 		
 	}
 	function completarDatos(){
+		$datos['solicitud']=$this->solicitud->getAllMe($this->session->userdata('id_usuario_sesion'));
+		$datos['nsol']=$this->solicitud->getNSMe($this->session->userdata('id_usuario_sesion'));
 		$datos['nproy']=$this->proyecto->getNproyS();
 		$datos['nact']=$this->actividad->getNActS();
 		return $datos;
 	}
 	function estadisti(){
 		$ano=$_POST["ano"];
+	}
+	function aprobar(){
+		$id_sol=$_REQUEST['q'];
+		$id_ac=$_REQUEST['z'];
+		$this->solicitud->aprobar($id_sol);
+        $this->actividad->modificarEstado(4,$id_ac);
+		$solm=$this->solm->getByIdSol($id_sol);
+		foreach ($solm->result() as $sm) {
+			$this->ep->peracu($sm->id_ep,$sm->monto);
+		}		
+		redirect('csolicitudes');
 	}
 
 }

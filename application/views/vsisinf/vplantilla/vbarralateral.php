@@ -166,13 +166,13 @@
                   </div>
                 </div></a>
           </li>
-          <li class="<?=$inicio_e?>">
+          <!-- <li class="<?=$inicio_e?>">
             <a href="home">
-              <!--<i class="now-ui-icons design_app"></i>-->
+              
 
               <img class="icon-xsm" src="apps/full-icon/flat/iconos-sys/home-1.png" alt="img"> <label class="barra-lat-img">Inicio</label>
             </a>
-          </li>
+          </li> -->
           <?php 
            if($idrol!=3000){
               if($idrol==1000){
@@ -203,29 +203,8 @@
           ?>         
         <?php 
         if($idrol==5000||$idrol==3000||$idrol==4000){
-              if($idrol==3000){
-                  ?>
-                <!--<li class="">
-                 <a href="#">
-                   <i class="now-ui-icons business_money-coins"></i>
-                   <p>Fondos</p>
-                 </a>
-               </li>-->
-                  <?php
-              }else{
-                 ?><li class="<?=$proyecto_e?>">
-                   <a href="clista_proyecto">
-                     <img class="icon-xsm" src="apps/full-icon/flat/iconos-sys/network.png" alt="img"> <label class="barra-lat-img">Proyectos</label>
-                   </a>
-                 </li>
-                  <?php 
-               }
+              
                    ?>  
-               <li class="<?=$repo?>">
-                 <a href="creportes">
-                   <img class="icon-xsm" src="apps/full-icon/flat/iconos-sys/pie-chart-1.png" alt="img"> <label class="barra-lat-img">Reportes</label>
-                 </a>
-               </li>            
                <li class="<?=$soli_e?>">
                  <a href="csolicitudes">
                    <img class="icon-xsm" src="apps/full-icon/flat/iconos-sys/notepad-2.png" alt="img"> <label class="barra-lat-img">Solicitudes</label>
@@ -242,7 +221,29 @@
                    <img class="icon-xsm" src="apps/full-icon/flat/iconos-sys/diamond.png" alt="img"> <label class="barra-lat-img">Reembolsos</label>
                  </a>
                </li>
+               <li class="<?=$repo?>">
+                 <a href="creportes">
+                   <img class="icon-xsm" src="apps/full-icon/flat/iconos-sys/pie-chart-1.png" alt="img"> <label class="barra-lat-img">Reportes</label>
+                 </a>
+               </li>            
                 <?php
+                if($idrol==3000){
+                  ?>
+                <!--<li class="">
+                 <a href="#">
+                   <i class="now-ui-icons business_money-coins"></i>
+                   <p>Fondos</p>
+                 </a>
+               </li>-->
+                  <?php
+              }else{
+                 ?><li class="<?=$proyecto_e?>">
+                   <a href="clista_proyecto">
+                     <img class="icon-xsm" src="apps/full-icon/flat/iconos-sys/network.png" alt="img"> <label class="barra-lat-img">Proyectos</label>
+                   </a>
+                 </li>
+                  <?php 
+               }
          }
           ?>
         </ul>

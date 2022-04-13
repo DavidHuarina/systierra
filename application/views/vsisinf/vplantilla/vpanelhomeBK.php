@@ -26,7 +26,55 @@
               </div>
             </div>  -->
             <div class="row">
-
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Datos Estad&iacute;sticos</h5>
+                <h4 class="card-title">SYSTIERRA: Actividades/Año</h4>
+                <select class="form-control col-md-2" onchange="cambiaAEsta2(this.value)">
+                  <?php for ($i=(int)date("Y"); $i >=2000 ; $i--) { 
+                    if ($i==(int)date("Y")){
+                      ?><option value="<?=$i?>" selected><?=$i?></option><?php
+                    }else{
+                      ?><option value="<?=$i?>"><?=$i?></option><?php
+                    }
+                   
+                  }?>
+                </select>
+              </div>
+              <div class="card-body">
+                <div id="mensajeA"></div>
+              <canvas id="proy"></canvas>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> Ahora
+                </div>
+              </div>
+            </div>
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Datos Estad&iacute;sticos</h5>
+                <h4 class="card-title">SYSTIERRA: Actividades/Año</h4>
+                <select class="form-control col-md-2" onchange="cambiaAEsta(this.value)">
+                  <?php for ($i=(int)date("Y"); $i >=2000 ; $i--) { 
+                    if ($i==(int)date("Y")){
+                      ?><option value="<?=$i?>" selected><?=$i?></option><?php
+                    }else{
+                      ?><option value="<?=$i?>"><?=$i?></option><?php
+                    }
+                   
+                  }?>
+                </select>
+              </div>
+              <div class="card-body">
+              <canvas id="actividad-chart"></canvas>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> Ahora
+                </div>
+              </div>
+            </div>
            </div> 
             <!--<div class="card card-chart">
               <div class="card-header">
