@@ -63,7 +63,7 @@
   </nav>
   <!-- End Navbar -->
   <div class="page-header clear-filter" filter-color="verde">
-    <div class="page-header-image" style="background-image: url('apps/assets/img/yun.jpeg');"></div>
+    <div class="page-header-image" style="background-image: url('apps/assets/img/camp.jpg');"></div>
     <div class="container text-center">
       <div id="opciones_reg">
         <h3 class="description">ESCOJA UNA REGIONAL</h3>
@@ -87,8 +87,8 @@
                 <div class="ch-info">
                   <div class="ch-info-front ch-img-1"></div>
                   <div class="ch-info-back">
-                    <h3>REGIONAL ALTIPLANO</h3>
-                    <p>La Paz <a href="#" onclick="setearSel(1000,'REGIONAL ALTIPLANO','apps/plugins/circle/images/11.jpg')">Seleccionar</a></p>
+                    <h3>REGIONAL OCCIDENTE</h3>
+                    <p>La Paz <a href="#" onclick="setearSel(1000,'REGIONAL OCCIDENTE','apps/plugins/circle/images/11.jpg')">Seleccionar</a></p>
                   </div>  
                 </div>
               </div>

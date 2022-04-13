@@ -59,14 +59,14 @@
   </nav>
   <!-- End Navbar -->
   <div class="page-header clear-filter" filter-color="blue">
-    <div class="page-header-image" style="background-image: url('apps/assets/img/417933.jpg');"></div>
+    <div class="page-header-image" style="background-image: url('apps/assets/img/camp2.jpg');"></div>
     <div class="container text-center">
       <div class="col-md-8 ml-auto mr-auto">
         <div class="brand">
           <h1 class="title">
             SysTierra
           </h1>
-          <h3 class="description">Version v1.1.1</h3>
+          <h3 class="description">Version v1.2</h3>
           <br/>
               <form action="" onsubmit="validateLogin(); return false;" method="POST">
                  <center>
@@ -96,7 +96,7 @@
         <ul>
           <li>
             <a href="#">
-              DHSoft
+              DavSoft
             </a>
           </li>
           <li>
