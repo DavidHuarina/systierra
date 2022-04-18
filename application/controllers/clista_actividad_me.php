@@ -21,10 +21,16 @@ class Clista_actividad_me extends C_datos {
 	function completarDatos(){
 		//$datos['proyecto']=$this->proyecto->getAlls();
 		$datos['proyecto']=$this->proyecto->getAllsDis();
-		$datos['actividad']=$this->actividad->getAll($this->session->userdata('id_usuario_sesion'));
+		if(isset($_GET['des'])){
+			$datos['actividad']=$this->actividad->getAllEstado($this->session->userdata('id_usuario_sesion'),4);
+		}else{			
+			$datos['actividad']=$this->actividad->getAll($this->session->userdata('id_usuario_sesion'));
+		}
+		
 		$datos['ultima_act']=$this->actividad->getUltima($this->session->userdata('id_usuario_sesion'));
 		$datos['actividadR']=$this->actividad->getEstadoRandom($this->session->userdata('id_usuario_sesion'),4);
 		$datos['nact']=$this->actividad->getNAct($this->session->userdata('id_usuario_sesion'));
+		$datos['sin_descargo']=$this->actividad->getCantidadActividades($this->session->userdata('id_usuario_sesion'),4)->cantidad_sin_descargo;
 		
 		return $datos;
 	}

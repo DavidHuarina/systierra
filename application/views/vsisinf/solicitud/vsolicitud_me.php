@@ -70,7 +70,7 @@
                            <span class="spinner-grow spinner-grow-sm"></span> <?=$estado?>
                           </button>
                           <div class="dropdown-menu">
-                            <?php if(($sol->estado_s==1||$sol->estado_s==2||$sol->estado_s==3)&&($idrol==3000)){
+                            <?php if((($sol->estado_s==1||$sol->estado_s==2||$sol->estado_s==3)&&($idrol==3000))||$global_usuario=="ADMIN-01"){
                                     if($sol->estado_s==2){
                                        echo "";
                                      }else{

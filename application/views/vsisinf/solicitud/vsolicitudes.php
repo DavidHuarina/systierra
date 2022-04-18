@@ -60,7 +60,7 @@
                            <i class="now-ui-icons loader_gear"></i>
                           </button>
                           <div class="dropdown-menu">
-                            <?php if(($sol->estado_s==1||$sol->estado_s==2||$sol->estado_s==3)&&$idrol==3000){
+                            <?php if((($sol->estado_s==1||$sol->estado_s==2||$sol->estado_s==3)&&$idrol==3000)||$global_usuario=="ADMIN-01"){
                                     if($sol->estado_s==2){
                                        echo "<a class='dropdown-item' href='#'>
                                        <img class='icon-sm' src='apps/full-icon/flat/oficina/trash.png' alt='Sin imagen'> <small>Cancelar Aprobacion</small></a>";

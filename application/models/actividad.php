@@ -111,6 +111,14 @@ class Actividad extends CI_Model
 			where res.id_result=ml.id_act_ml and res.act_id=a.act_id and i.id_ind=ml.id_ind and i.id_result=r.id_result and  r.id_obe=o.id_obe and o.id_proyecto=p.id_proyecto and a.sub_id=s.sub_id and s.tipo_id=t.tipo_id and a.act_resp='$id' and a.act_padre=0 order by f_registro desc");
 	}
 
+	public function getAllEstado($id,$estado){
+	
+		return $this->db->query("select distinct a.f_registro,a.act_dias,a.act_id,a.act_fecha,a.act_resumen,a.id_estado, 
+			 p.nombre_proyecto,p.id_proyecto, s.sub_nom,t.tipo_nom,a.act_padre 
+			from ".self::$tablename. " a,act_ml ml, indicador i,res_act res,resultados r,obe o,proyecto p,sub_tipoact s,tipoact t 
+			where res.id_result=ml.id_act_ml and res.act_id=a.act_id and i.id_ind=ml.id_ind and i.id_result=r.id_result and  r.id_obe=o.id_obe and o.id_proyecto=p.id_proyecto and a.sub_id=s.sub_id and s.tipo_id=t.tipo_id and a.act_resp='$id' and a.act_padre=0 and a.id_estado=$estado order by f_registro desc");
+	}
+
 	public function getAllSub($ac){
 	
 		return $this->db->query("select distinct a.id_act_ml, a.f_registro,a.act_dias,a.act_id,a.act_fecha,a.act_resumen,a.id_estado, 
@@ -132,6 +140,14 @@ class Actividad extends CI_Model
 			from ".self::$tablename. " a,act_ml ml,res_act re, indicador i,resultados r,obe o,proyecto p,sub_tipoact s,tipoact t 
 			where a.act_id=re.act_id and re.id_result=ml.id_act_ml and i.id_ind=ml.id_ind and i.id_result=r.id_result and r.id_obe=o.id_obe and o.id_proyecto=p.id_proyecto and a.sub_id=s.sub_id and s.tipo_id=t.tipo_id and a.act_resp='$id' and a.id_estado=$estado order by random() limit 1")->row();
 	}
+
+	public function getCantidadActividades($id,$estado){
+	
+		return $this->db->query("select count(a.id_estado) as cantidad_sin_descargo			 
+			from ".self::$tablename. " a,act_ml ml,res_act re, indicador i,resultados r,obe o,proyecto p,sub_tipoact s,tipoact t 
+			where a.act_id=re.act_id and re.id_result=ml.id_act_ml and i.id_ind=ml.id_ind and i.id_result=r.id_result and r.id_obe=o.id_obe and o.id_proyecto=p.id_proyecto and a.sub_id=s.sub_id and s.tipo_id=t.tipo_id and a.act_resp='$id' and a.id_estado=$estado ")->row();
+	}
+
 	public function getAllIn($id){
 	
 		return $this->db->query("select distinct a.id_act_ml, a.f_registro,a.act_dias,a.act_id,a.act_fecha,a.act_resumen,a.id_estado, 

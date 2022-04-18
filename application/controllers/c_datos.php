@@ -68,7 +68,7 @@ class C_datos extends CI_Controller {
     $datos['listaN']=$this->notificacion->getAllNoti($personal->id_usuario);
       $datos['nnot']=$this->notificacion->getAllNotiN($personal->id_usuario);
       $datos['nnotn']=$this->notificacion->getAllNotiNu($personal->id_usuario);
-        
+    $datos['global_usuario']=$idUser;    
     return $datos;
   }
   function date_sort($a,$b){

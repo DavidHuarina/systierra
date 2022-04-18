@@ -89,11 +89,12 @@
                   <div class="row">
                      <div class="col-md-3 d-md-flex d-none">
                       <?php
-                       if($actividadR==null){
-                        $hrefj="#";
-                       }else{
-                         $hrefj="cnuevo_descargo?id=$actividadR->id_proyecto&ac=$actividadR->act_id";
-                       }
+                       // if($actividadR==null){
+                       //  $hrefj="#";
+                       // }else{
+                       //   $hrefj="cnuevo_descargo?id=$actividadR->id_proyecto&ac=$actividadR->act_id";
+                       // }
+                      $hrefj="clista_actividad_me?des=1";
                       ?>
                         <a href="<?=$hrefj?>"><img class="icon-md" src="apps/full-icon/flat/negocio/point-of-service.png" alt="img"></a>
                      </div>
@@ -101,30 +102,30 @@
                        <a href="<?=$hrefj?>"><label class="text-info">Actividad sin descargo</label></a><br>
                        <?php 
                          if($actividadR!=null){
+                          echo $sin_descargo;
                           ?>
-                       <label class="text-muted"><?php $porcione = explode("@", $actividadR->sub_nom);?>
-                          <?=$porcione[0]?></label>
+                       <!-- <label class="text-muted"></label> -->
                           <br>
                           <?php 
-                            $dia=null;
-                            $hoy=strftime('%d de %B de %Y',time());
-                            $ayer=strftime('%d de %B de %Y',strtotime('yesterday'));
-                            $dia=strftime('%d de %B de %Y',strtotime($actividadR->f_registro));
-                            if($dia==$hoy){
-                              ?>
-                            <small class="Last-responded mr-2 mb-0 text-muted text-muted">Hoy <?=strftime('%H:%M ',strtotime($actividadR->f_registro))?></small>
+                            // $dia=null;
+                            // $hoy=strftime('%d de %B de %Y',time());
+                            // $ayer=strftime('%d de %B de %Y',strtotime('yesterday'));
+                            // $dia=strftime('%d de %B de %Y',strtotime($actividadR->f_registro));
+                            // if($dia==$hoy){
+                            //   ?>
+                            <!-- <small class="Last-responded mr-2 mb-0 text-muted text-muted">Hoy <?=strftime('%H:%M ',strtotime($actividadR->f_registro))?></small> -->
                             <?php
-                            }else{
-                              if($dia==$ayer){
-                                ?>
-                                <small class="Last-responded mr-2 mb-0 text-muted text-muted">Ayer <?=strftime('%H:%M ',strtotime($actividadR->f_registro))?></small>
-                               <?php
-                              }else{
-                               ?>
-                                <small class="Last-responded mr-2 mb-0 text-muted text-muted"><?=$dia." ".strftime('%H:%M ',strtotime($actividadR->f_registro))?></small>
-                               <?php 
-                              }                      
-                            }
+                            // }else{
+                            //   if($dia==$ayer){
+                            //     ?>
+                            <!--  <small class="Last-responded mr-2 mb-0 text-muted text-muted">Ayer <?=strftime('%H:%M ',strtotime($actividadR->f_registro))?></small> -->
+                            <?php
+                            //   }else{
+                            //    ?>
+                             <!-- <small class="Last-responded mr-2 mb-0 text-muted text-muted"><?=$dia." ".strftime('%H:%M ',strtotime($actividadR->f_registro))?></small> -->
+                            <?php 
+                            //   }                      
+                            // }
                         }else{
                           echo "<label>No hay actividad</label>";
                         }    
