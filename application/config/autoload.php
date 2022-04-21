@@ -165,5 +165,5 @@ $autoload['model'] = array('persona','personal','usuario','rol','cargo','v_datos
 	'parti',
 	'com_act',
 	'cambio',
-	'regional','res_act');
+	'regional','res_act','funciones');
 

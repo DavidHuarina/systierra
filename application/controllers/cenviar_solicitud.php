@@ -13,8 +13,9 @@ class Cenviar_solicitud extends C_datos {
 		$datosUsuario=$this->obtenerDatosUsuario($this->session->userdata('id_usuario_sesion'));
 		$datosUsuario+=$this->completarDatos($id_p,$id_ac);
 		$datosUsuario['title_nav']="Solicitud";
-		$this->load->view('vsisinf/vplantilla/vbarralateral',$datosUsuario);
-		$this->load->view('vsisinf/vplantilla/vnavegacion');
+		// $this->load->view('vsisinf/vplantilla/vbarralateral',$datosUsuario);
+		// $this->load->view('vsisinf/vplantilla/vnavegacion');
+		$this->load->view('vsisinf/vplantilla/vnavegacion_entero',$datosUsuario);
 		if($datosUsuario['actividad']->id_estado==1){
 		  $this->load->view('vsisinf/vactividad/vnueva_solicitud');	
 		}else{
@@ -44,6 +45,7 @@ class Cenviar_solicitud extends C_datos {
 		$datos['ru']=$this->rubro->getAll();
 		$datos['sm']=$this->sol_act->getAllByIdA($datos['actividad']->act_id);
 		$datos['receptores']=$this->personal->getAllReceptores();
+		$datos['equipot']=$this->col_act->getAllAct($ac);
 		return $datos;
 	}
    function agregar(){
@@ -74,7 +76,7 @@ class Cenviar_solicitud extends C_datos {
              $ndescargo->id_sol=$solicitud->id_sol;
              $ndescargo->add();
 
-             //$this->actividad->modificarEstado(2,$id_ac);
+             $this->actividad->modificarEstado(2,$id_ac);
               
              if($this->sol_act->existe($solicitud->id_sol,$id_ac)->num==0){
               $sol_act= new Sol_act();

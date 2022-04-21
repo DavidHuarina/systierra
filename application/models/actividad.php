@@ -9,6 +9,7 @@ class Actividad extends CI_Model
 	{
 		 parent::__construct();
          $act_fecha=NULL;
+         $act_fecha_salida=NULL;
          $act_resp="";
          $act_resumen="";
          $act_obs="";
@@ -25,8 +26,8 @@ class Actividad extends CI_Model
 
 	public function add()
 	{
-		$sql="insert into ".self::$tablename." (act_id,act_fecha,act_resp,act_dias,f_registro,sub_id,id_lugar,com_id,id_estado,id_act_ml,id_res,act_padre) 
-		VALUES(nextval('sq_actividad'),'$this->act_fecha','$this->act_resp',$this->act_dias,now(),$this->sub_id,$this->id_lugar,$this->com_id,1,$this->id_act_ml,$this->id_res,$this->act_padre) 
+		$sql="insert into ".self::$tablename." (act_id,act_fecha,act_resp,act_dias,f_registro,sub_id,id_lugar,com_id,id_estado,id_act_ml,id_res,act_padre,act_fecha_salida) 
+		VALUES(nextval('sq_actividad'),'$this->act_fecha','$this->act_resp',$this->act_dias,now(),$this->sub_id,$this->id_lugar,$this->com_id,1,$this->id_act_ml,$this->id_res,$this->act_padre,'$this->act_fecha_salida') 
 		RETURNING act_id";
 		return $this->db->query($sql)->row();
 	}
@@ -143,7 +144,7 @@ class Actividad extends CI_Model
 
 	public function getCantidadActividades($id,$estado){
 	
-		return $this->db->query("select count(a.id_estado) as cantidad_sin_descargo			 
+		return $this->db->query("select count(*) as cantidad_sin_descargo			 
 			from ".self::$tablename. " a,act_ml ml,res_act re, indicador i,resultados r,obe o,proyecto p,sub_tipoact s,tipoact t 
 			where a.act_id=re.act_id and re.id_result=ml.id_act_ml and i.id_ind=ml.id_ind and i.id_result=r.id_result and r.id_obe=o.id_obe and o.id_proyecto=p.id_proyecto and a.sub_id=s.sub_id and s.tipo_id=t.tipo_id and a.act_resp='$id' and a.id_estado=$estado ")->row();
 	}

@@ -13,8 +13,10 @@ class Cvista_solA extends C_datos {
 		$datosUsuario+=$this->completarDatos($id_p,$id_ac);
 		$datosUsuario['title_nav']="Solicitud";
 		$datosUsuario['sol']=$_REQUEST['sol'];
-		$this->load->view('vsisinf/vplantilla/vbarralateral',$datosUsuario);
-		$this->load->view('vsisinf/vplantilla/vnavegacion');
+
+
+		//$this->load->view('vsisinf/vplantilla/vbarralateral');
+		$this->load->view('vsisinf/vplantilla/vnavegacion_entero',$datosUsuario);
 		  $this->load->view('vsisinf/vistas_previas/vvista_solA');	
 		$this->load->view('vsisinf/vplantilla/modals/vinfo_nproy');
 		$this->load->view('vsisinf/vplantilla/vfooter');	

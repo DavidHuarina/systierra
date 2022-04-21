@@ -55,13 +55,24 @@
                   </div>
                   <div class="rounded titulos"><center><p class="text-md">Datos Espec&iacute;ficos</p></center></div><br>
                   <div class="row">
-                    <div class="col-md-7 pr-1">
+                    <div class="col-md-4 pr-1">
                       <div class="form-group validate-input" data-validate="Ingrese una fecha">
                         <label>Fecha de la actividad</label>
                         <?php if($fa=="none"){
                           ?><input type="text" id="fi_p" name="fi_p"class="form-control" placeholder="Ej: dd/mm/aaaa" value=""><?php
                         }else{
                           ?><input type="text" id="fi_p" name="fi_p"class="form-control" placeholder="Ej: dd/mm/aaaa" value="<?=$fa?>"><?php
+                        }?>
+                        
+                      </div>
+                    </div>
+                    <div class="col-md-3 pr-1">
+                      <div class="form-group validate-input" data-validate="Ingrese una fecha">
+                        <label>Fecha de Salida</label>
+                        <?php if($fa=="none"){
+                          ?><input type="text" id="fi_p_salida" name="fi_p_salida"class="form-control" placeholder="Ej: dd/mm/aaaa" value=""><?php
+                        }else{
+                          ?><input type="text" id="fi_p_salida" name="fi_p_salida"class="form-control" placeholder="Ej: dd/mm/aaaa" value="<?=$fa?>"><?php
                         }?>
                         
                       </div>

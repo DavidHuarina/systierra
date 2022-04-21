@@ -157,6 +157,7 @@ class Cnueva_actividad extends C_datos {
     $tipo=$tipon->tipo_nom;
     $tipoact=$this->tipoact->getByNombre($tipo);
 		$f_a=$this->input->post('fi_p');
+    $fi_p_salida=$this->input->post('fi_p_salida');
 		$dias=$this->input->post('dias');
 		$res=$this->input->post('select-act_ml');
 		$com_otro=$this->input->post('optradio');
@@ -237,6 +238,7 @@ class Cnueva_actividad extends C_datos {
 
                $nactividad=new Actividad();
                $nactividad->act_fecha=$f_a;
+               $nactividad->act_fecha_salida=$fi_p_salida;
                $nactividad->act_resp=$this->session->userdata('id_usuario_sesion');
                $nactividad->act_dias=$dias;
                $nactividad->sub_id=$auxd->sub_id;
@@ -298,31 +300,31 @@ class Cnueva_actividad extends C_datos {
             $id_a=$id_ac;
     //$id_p=$_REQUEST["idp"];
             
-   $allep=$this->ep->getAll();
-            $fondo=$this->proy_EP->getByIdProyecto($id_p);
+//    $allep=$this->ep->getAll();
+//             $fondo=$this->proy_EP->getByIdProyecto($id_p);
 
-foreach ($allep->result() as $allep) {
-    $sol=$solicitud->id_sol;
-    $s=$allep->id_subr;
-    $f=$fondo->id_proy_ep;
-    $monto=0;
-    $des="Sin descripcion";
-    $ep=$this->ep->getByIdSF($s,$f);
+// foreach ($allep->result() as $allep) {
+//     $sol=$solicitud->id_sol;
+//     $s=$allep->id_subr;
+//     $f=$fondo->id_proy_ep;
+//     $monto=0;
+//     $des="Sin descripcion";
+//     $ep=$this->ep->getByIdSF($s,$f);
          
-      //if($this->solm->existe($ep->id_ep)->num==0){
-    if($ep!=null){
-      $ver=$this->solm->existe2($ep->id_ep,$sol);
-      if($ver->num==0){
-                $solm=new Solm();
-            $solm->monto=$monto;
-            $solm->id_ep=$ep->id_ep;
-            $solm->id_sol=$sol;
-            $solm->descripcion=$des;
-            $id=$solm->add();
-            $this->solicitud->updateTotal($sol,$monto);
-      }            
-    }
-}
+//       //if($this->solm->existe($ep->id_ep)->num==0){
+//     if($ep!=null){
+//       $ver=$this->solm->existe2($ep->id_ep,$sol);
+//       if($ver->num==0){
+//                 $solm=new Solm();
+//             $solm->monto=$monto;
+//             $solm->id_ep=$ep->id_ep;
+//             $solm->id_sol=$sol;
+//             $solm->descripcion=$des;
+//             $id=$solm->add();
+//             $this->solicitud->updateTotal($sol,$monto);
+//       }            
+//     }
+// }
     
            
 ////////////////////////////////////////////////////FIN DE SOL_MONTOS
@@ -330,14 +332,14 @@ foreach ($allep->result() as $allep) {
 //finalizacion de solicitud con solmontos
 
     //$this->actividad->modificarEstado(3,$ida);
-    $solicitud=$this->solicitud->getAllByIdS($sol);
-    $actividad=$this->actividad->getById($ida->act_id);
-    $noti=new Notificacion();
-        $noti->referencia="Tienes una solicitud"."%".$actividad->sub_nom."%".$ida->act_id;
-        $noti->id_emisor=$solicitud->id_solicitante;
-        $noti->id_receptor=$solicitud->id_receptor;
-        $noti->id_tipo_notificacion=2;
-        $noti->add();
+    // $solicitud=$this->solicitud->getAllByIdS($sol);
+    // $actividad=$this->actividad->getById($ida->act_id);
+    // $noti=new Notificacion();
+    //     $noti->referencia="Tienes una solicitud"."%".$actividad->sub_nom."%".$ida->act_id;
+    //     $noti->id_emisor=$solicitud->id_solicitante;
+    //     $noti->id_receptor=$solicitud->id_receptor;
+    //     $noti->id_tipo_notificacion=2;
+    //     $noti->add();
 
         ////////////////////////////////////////
 

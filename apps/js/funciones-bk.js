@@ -1960,6 +1960,7 @@ $('#ff_p').datepicker({
   startDate:'-3d'
 });
 
+
 function validateLogin(){
    var us = $("#usuario").val();
     var cn = $("#contrasena").val();

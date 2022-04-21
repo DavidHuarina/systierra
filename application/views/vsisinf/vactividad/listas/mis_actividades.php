@@ -249,6 +249,15 @@
                                            <img class='icon-sm' src='apps/full-icon/flat/iconos-sys/layers.png' alt='Sin imagen'> <label class='text-small'>Sub Actividad ".$nsub->num."</label></a>";
                                          }
                                      }else{
+                                        $soli=$this->sol_act->getByIdA($act->act_id)->id_sol;
+                                        if($soli>0){
+                                          echo "<a class='dropdown-item' href='cenviar_solicitud?id=".$act->id_proyecto."&ac=".$act->act_id."&sol=".$soli."'>
+                                       <img class='icon-sm' src='apps/full-icon/flat/iconos-sys/notepad-2.png' alt='Sin imagen'> <label class='text-small'>Solicitud Gastos</label></a>";   
+                                        }else{
+                                          echo "<a class='dropdown-item' href='cenviar_solicitud?id=".$act->id_proyecto."&ac=".$act->act_id."'>
+                                       <img class='icon-sm' src='apps/full-icon/flat/iconos-sys/notepad-2.png' alt='Sin imagen'> <label class='text-small'>Solicitud Gastos</label></a>";
+                                        }
+                                       
                                        echo "<a class='dropdown-item' href='cnequipo?ac=".$act->act_id."'>
                                        <img class='icon-sm' src='apps/full-icon/flat/equipo/team-2.png' alt='Sin imagen'> <label class='text-small'>Equipo de trabajo</label></a>";
                                        if($nparti->num==0){

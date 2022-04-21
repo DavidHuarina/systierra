@@ -5,7 +5,7 @@
   $recep=$this->solicitud->getAllReceptor($sol);
   $soli=$this->solicitud->getAllSolicitante($sol);
 ?>
-<div class="panel-header-sm bg-warning">
+<div class="panel-header-sm bg-info">
 </div>
    <div class="content">
         <div class="row">

@@ -1972,6 +1972,10 @@ $('#ff_p').datepicker({
   format:'dd/mm/yyyy',
   startDate:'-3d'
 });
+$('#fi_p_salida').datepicker({
+  format:'dd/mm/yyyy',
+  startDate:'-3d'
+});
 
 function validateLogin(){
    var us = $("#usuario").val();
