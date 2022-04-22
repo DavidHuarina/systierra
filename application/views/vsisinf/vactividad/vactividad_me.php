@@ -110,7 +110,7 @@
                                            <img class='icon-sm' src='apps/full-icon/flat/negocio/point-of-service.png' alt='Sin imagen'> <small>Descargo Fondo</small></a>";
                                          }
                                      }else{
-                                        echo "<a class='dropdown-item' href='cenviar_solicitud?id=".$act->id_proyecto."&ac=".$act->act_id."'>
+                                        echo "<a class='dropdown-item' href='cenviar_solicitud?id=".$act->id_proyecto."&ac=".$act->act_id."' target='_blank'>
                                        <img class='icon-sm' src='apps/full-icon/flat/negocio/change.png' alt='Sin imagen'> Solicitar Fondo</a>";
                                      }
                                     

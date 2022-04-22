@@ -5,6 +5,7 @@ class Clista_actividad extends C_datos {
 
 	public function index()
 	{ 
+		redirect('clista_actividad_me');
 		$titulo = array('titulo' => "Sistema de gestión - Fundacion Tierra");
 		$this->load->view('vsisinf/vplantilla/vcabecera',$titulo);
 		$datosUsuario=$this->obtenerDatosUsuario($this->session->userdata('id_usuario_sesion'));

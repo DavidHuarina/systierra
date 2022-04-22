@@ -1,4 +1,4 @@
-<div class="panel-header panel-header-sm">
+<div class="panel-header-sm bg-warning">
 </div>
 <div class="content">
         <div class="row">
