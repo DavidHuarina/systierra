@@ -18,6 +18,7 @@ class Cusuario extends C_datos {
 	function complementarDatos($idUser){
 		$personal = $this->v_datos_usuario->getById($idUser);
 		$datos['apellidos_usuario']=$personal->apellido_persona;
+		$datos['numero_ci']=$personal->numero_ci;
 		$datos['cargo_usuario']=$personal->nombre_cargo;
 		$datos['telefono_usuario']=$personal->telefono;
 		$datos['correo_usuario']=$personal->correo;

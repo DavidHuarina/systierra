@@ -327,12 +327,12 @@ foreach ($res->result() as $row) {
 
                                  <tr><td style="text-align: center;" colspan="4"><b>A. GASTOS DE VIAJE</b></td></tr>
                           <?php
-                          foreach ($sm_fondos->result() as $sum) {                            
+                          foreach ($sm_gastos->result() as $sum) {                            
                             $item++;
                             ?>
                             <tr>
                               <td><?=$item?></td>
-                               <td><?php $porciones = explode("@", $sum->descrip);?> <?=$porciones[0]?></td>
+                               <td><?=$sum->descripcionobs?> <?php $porciones = explode("@", $sum->descrip);?></td>
                                <td><b><?=$porciones[1]?><b></td>
                                <td align="right"><?=number_format($sum->monto, 2, '.', ',');?></td>
                             </tr>
@@ -340,12 +340,12 @@ foreach ($res->result() as $row) {
                           }
                           ?><tr><td style="text-align: center;" colspan="4"><b>B. FONDOS EN AVANCE</b></td></tr>
                           <?php
-                          foreach ($sm_gastos->result() as $sum) {                            
+                          foreach ($sm_fondos->result() as $sum) {                            
                             $item++;
                             ?>
                             <tr>
                               <td><?=$item?></td>
-                               <td><?php $porciones = explode("@", $sum->descrip);?> <?=$porciones[0]?></td>
+                               <td><?=$sum->descripcionobs?> <?php $porciones = explode("@", $sum->descrip);?> <?=$porciones[0]?></td>
                                <td><b><?=$porciones[1]?><b></td>
                                <td align="right"><?=number_format($sum->monto, 2, '.', ',');?></td>
                             </tr>
@@ -354,7 +354,7 @@ foreach ($res->result() as $row) {
                           $nuevoDias=(int)$actividad->act_dias-1;
                           ?>
                           <tr>
-                              <td style="text-align: center;" colspan="3"><b>TOTAL GASTOS OPERATIVOS</b></td>
+                              <td style="text-align: center;" colspan="3"><b>TOTAL</b></td>
                                <td align="right"><b><?=number_format($totalsol, 2, '.', ',');?></b></td>
                             </tr>
                          </table>

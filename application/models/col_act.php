@@ -76,7 +76,8 @@ public function Existe($id,$id2){
 		return $query;
 	}
 public function getAllAct($id){
-		$sql = "select cl.*,p.*,r.nombre_regional,c.nombre_cargo,p.numero_ci from col_act cl,persona p,personal pe,usuario u,regional r,cargo c where c.id_cargo=pe.id_cargo and p.id_persona=pe.id_persona and u.id_usuario=pe.id_usuario and u.id_regional=r.id_regional and p.id_persona=cl.id_persona and cl.act_id=$id order by p.nombre_persona";
+		$sql = "select cl.*,p.*,(SELECT r.nombre_regional FROM regional r join usuario u on  u.id_regional=r.id_regional join personal pe on u.id_usuario=pe.id_usuario where  p.id_persona=pe.id_persona) as nombre_regional, (SELECT c.nombre_cargo FROM cargo c join personal pe on c.id_cargo=pe.id_cargo where  p.id_persona=pe.id_persona) as nombre_cargo,p.numero_ci 
+		  from col_act cl,persona p where p.id_persona=cl.id_persona and cl.act_id=$id order by p.nombre_persona";
 		$query = $this->db->query($sql);
 		return $query;
 	}

@@ -159,6 +159,9 @@
                                 <b><small class="text-white">Duración (días)</small></b>
                              </th>
                              <th>
+                                <b><small class="text-white">Monto<br>Solicitud</small></b>
+                             </th>
+                             <th>
                                 <b><small class="text-white">Estado</small></b>
                              </th>
                              <th>
@@ -208,6 +211,7 @@
                          <td><?=$act->nombre_proyecto?></td>
                          <td><?=strftime('%d de %B de %Y',strtotime($act->act_fecha))?></td>
                          <td class="text-center"><?php if($act->act_dias==1){ echo $act->act_dias;}else{ echo $act->act_dias;}?></td>
+                         <td class="text-right"><b><?=number_format($act->monto_solicitud,2,'.',',')?></b></td>
                          <td class="">
                           <div class="btn-group dropdown">
                           <button type="button" class="btn <?=$estilo?> btn-round dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

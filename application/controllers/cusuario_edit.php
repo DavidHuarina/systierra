@@ -31,6 +31,7 @@ class Cusuario_edit extends C_datos {
 		$datos['imagen_usuario']=$personal->dir_imagen;
 		$datos['direccion']=$personal->direccion;
         $datos['sobre_mi']=$personal->sobre_mi;
+        $datos['numero_ci']=$personal->numero_ci;
 		return $datos;
 	}
 	function edit_u(){
@@ -45,10 +46,11 @@ class Cusuario_edit extends C_datos {
        $personales->correo=$this->input->post('correo_u');
        $personales->fecha_nacimiento=$this->input->post('fi_p');
        $personales->direccion=$this->input->post('dir_u');
+       $personales->numero_ci=$this->input->post('documento');
        $personales->update();
        
        $user=$this->usuario->getById($this->session->userdata('id_usuario_sesion'));
-       $user->sobre_mi=$this->input->post('sobre');
+       $user->sobre_mi=$this->input->post('sobre');    
        $user->update();
 
        redirect('cusuario');

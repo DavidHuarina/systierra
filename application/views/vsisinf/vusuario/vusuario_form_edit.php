@@ -73,6 +73,14 @@
                     </div>
                   </div>
                   <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>CI</label>
+                        <input type="text" class="form-control" id="documento" name="documento" placeholder="Carnet" value="<?=$numero_ci?>">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Sobre m&iacute;</label>

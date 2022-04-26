@@ -53,7 +53,9 @@ class Personal extends CI_Model{
 		$this->db->set('telefono',$this->telefono);
 		$this->db->set('fecha_nacimiento',$this->fecha_nacimiento);
 		$this->db->set('direccion',$this->direccion);
+		$this->db->set('numero_ci',$this->numero_ci);
 		$this->db->where('id_persona',$this->id_persona);
+
 		$this->db->update(self::$tablename);
 	}
 	public function update_estado_per($id,$estado){

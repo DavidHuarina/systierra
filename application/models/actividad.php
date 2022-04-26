@@ -107,7 +107,7 @@ class Actividad extends CI_Model
 	public function getAll($id){
 	
 		return $this->db->query("select distinct a.f_registro,a.act_dias,a.act_id,a.act_fecha,a.act_resumen,a.id_estado, 
-			 p.nombre_proyecto,p.id_proyecto, s.sub_nom,t.tipo_nom,a.act_padre 
+			 p.nombre_proyecto,p.id_proyecto, s.sub_nom,t.tipo_nom,a.act_padre,(select s.total from solicitud s join sol_act sa on sa.id_sol=s.id_sol where sa.act_id=a.act_id order by sa.id_sol_act desc limit 1) as monto_solicitud 
 			from ".self::$tablename. " a,act_ml ml, indicador i,res_act res,resultados r,obe o,proyecto p,sub_tipoact s,tipoact t 
 			where res.id_result=ml.id_act_ml and res.act_id=a.act_id and i.id_ind=ml.id_ind and i.id_result=r.id_result and  r.id_obe=o.id_obe and o.id_proyecto=p.id_proyecto and a.sub_id=s.sub_id and s.tipo_id=t.tipo_id and a.act_resp='$id' and a.act_padre=0 order by f_registro desc");
 	}
@@ -115,7 +115,7 @@ class Actividad extends CI_Model
 	public function getAllEstado($id,$estado){
 	
 		return $this->db->query("select distinct a.f_registro,a.act_dias,a.act_id,a.act_fecha,a.act_resumen,a.id_estado, 
-			 p.nombre_proyecto,p.id_proyecto, s.sub_nom,t.tipo_nom,a.act_padre 
+			 p.nombre_proyecto,p.id_proyecto, s.sub_nom,t.tipo_nom,a.act_padre,(select s.total from solicitud s join sol_act sa on sa.id_sol=s.id_sol where sa.act_id=a.act_id order by sa.id_sol_act desc limit 1) as monto_solicitud  
 			from ".self::$tablename. " a,act_ml ml, indicador i,res_act res,resultados r,obe o,proyecto p,sub_tipoact s,tipoact t 
 			where res.id_result=ml.id_act_ml and res.act_id=a.act_id and i.id_ind=ml.id_ind and i.id_result=r.id_result and  r.id_obe=o.id_obe and o.id_proyecto=p.id_proyecto and a.sub_id=s.sub_id and s.tipo_id=t.tipo_id and a.act_resp='$id' and a.act_padre=0 and a.id_estado=$estado order by f_registro desc");
 	}

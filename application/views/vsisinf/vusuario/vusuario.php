@@ -19,6 +19,8 @@
                          <tr><td><label>Fecha de Nacimiento:</label></td><td><label class="text-lg text-dark"><?=strftime('%d de %B de %Y',strtotime($fnac_usuario))?></label></td></tr>
                          <tr><td><label>Usuario:</label></td><td><label class="text-lg text-dark"><?=$usuario?></label></td></tr>
                          <tr><td><label>Telefono:</label></td><td><label class="text-lg text-dark">+591 <?=$telefono_usuario?></label></td></tr>
+                         <tr><td><label>CI:</label></td><td><label class="text-lg text-dark"><?=$numero_ci?></label></td></tr>
+                         <!-- <tr><td><label>Regional:</label></td><td><label class="text-lg text-dark"><?=$numero_ci?></label></td></tr> -->
                     </table> <br>
                     <a href="cusuario_edit" class="btn btn-primary"><i class=""></i> Editar datos del perfil</a>
                     <a href="cusuario_editC" class="btn btn-warning float-right"><i class=""></i> Cambiar Contraseña</a>

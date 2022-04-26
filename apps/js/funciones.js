@@ -858,7 +858,7 @@ function nequipo(id,id_a){
                 $("#mensaje").html("Verificando...");
         },
         success:  function (resp) {
-                $("#mensaje").html(resp);
+                //$("#mensaje").html(resp);
                 window.location.href="cnequipo?ac="+id_a;
         }
     });
