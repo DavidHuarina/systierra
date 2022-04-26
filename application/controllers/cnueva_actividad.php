@@ -271,28 +271,28 @@ class Cnueva_actividad extends C_datos {
           }else{
             $formulario=$this->formulario->getByIds($recep,$this->session->userdata('id_usuario_sesion'));
           }
-             $nsolicitud=New Solicitud();
-             $nsolicitud->id_form=$formulario->id_form;
-             $nsolicitud->descripcion="";
-             $nsolicitud->total=0;
-             $solicitud=$nsolicitud->add();
+             // $nsolicitud=New Solicitud();
+             // $nsolicitud->id_form=$formulario->id_form;
+             // $nsolicitud->descripcion="";
+             // $nsolicitud->total=0;
+             // $solicitud=$nsolicitud->add();
 
-             $ndescargo=New Descargo();
-             //$ndescargo->total=0; total de gastos
-             //$ndescargo->saldo=0; //saldo depositado
-             //$ndescargo->f_descargo=null;
-             //$ndescargo->observacion="";
-             $ndescargo->id_sol=$solicitud->id_sol;
-             $ndescargo->add();
+             // $ndescargo=New Descargo();
+             // //$ndescargo->total=0; total de gastos
+             // //$ndescargo->saldo=0; //saldo depositado
+             // //$ndescargo->f_descargo=null;
+             // //$ndescargo->observacion="";
+             // $ndescargo->id_sol=$solicitud->id_sol;
+             // $ndescargo->add();
 
-             //$this->actividad->modificarEstado(2,$id_ac);
+             // //$this->actividad->modificarEstado(2,$id_ac);
               
-             if($this->sol_act->existe($solicitud->id_sol,$id_ac)->num==0){
-              $sol_act= new Sol_act();
-              $sol_act->act_id=$id_ac;
-              $sol_act->id_sol=$solicitud->id_sol;
-              $sol_act->add();
-              } 
+             // if($this->sol_act->existe($solicitud->id_sol,$id_ac)->num==0){
+             //  $sol_act= new Sol_act();
+             //  $sol_act->act_id=$id_ac;
+             //  $sol_act->id_sol=$solicitud->id_sol;
+             //  $sol_act->add();
+             //  } 
 
           //FIN DE LA INSERCION DE FORMULARIO SOLICITUD
 

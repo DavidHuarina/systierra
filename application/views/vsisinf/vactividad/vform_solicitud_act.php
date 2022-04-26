@@ -94,7 +94,29 @@ function calcularMontosAereo(){
   var totalSuma=0;
   $(".aereo").each(function(){
     var id=$(this).attr("id");
-    var persona=id.split("_")[2];    
+    var persona=id.split("_")[2]; 
+
+    $("#origen_1_"+persona).attr("class","form-control selectpicker d-none");
+    $("#origena_1_"+persona).attr("class","form-control selectpicker d-none");
+    $("#destino_1_"+persona).attr("class","form-control selectpicker d-none");
+    $("#destinoa_1_"+persona).attr("class","form-control selectpicker d-none");
+    $("#fechavuelo_1_"+persona).attr("class","form-control selectpicker d-none");
+    $("#fechavueloa_1_"+persona).attr("class","form-control selectpicker d-none");    
+    if($(this).val()==1){
+      $("#origen_1_"+persona).attr("class","form-control selectpicker");
+      $("#destino_1_"+persona).attr("class","form-control selectpicker");
+      $("#fechavuelo_1_"+persona).attr("class","form-control selectpicker");
+    }else if($(this).val()==2){
+      $("#origen_1_"+persona).attr("class","form-control selectpicker");
+      $("#origena_1_"+persona).attr("class","form-control selectpicker");
+      $("#destino_1_"+persona).attr("class","form-control selectpicker");
+      $("#destinoa_1_"+persona).attr("class","form-control selectpicker");
+      $("#fechavuelo_1_"+persona).attr("class","form-control selectpicker");
+      $("#fechavueloa_1_"+persona).attr("class","form-control selectpicker");
+    }
+
+
+       
     costoFila[persona]=0;
     costoRetencion[persona]=0;  
     costoRetencion2[persona]=0;    
@@ -118,6 +140,7 @@ function calcularMontosAereo(){
     }    
   }
   $("#total_aereo").val(Number(totalSuma).toFixed(2));
+  //$(".selectpicker").selectpicker("refresh");
 }
 
 
@@ -165,6 +188,9 @@ function calcularMontosPerNocte(){
     padding: 2px;    
     background:#FFE933 !important;
   }
+  body{
+              zoom: 95%;
+            }
 </style>
 
 <div class="panel-header-sm bg-warning">
@@ -249,12 +275,27 @@ function calcularMontosPerNocte(){
                              <th><b>Cargo</b></th>
                              <th><b>Documento<br>Identidad</b></th>
                              <?php 
+                             $sqlDepa="SELECT dep_id as id,dep_des as descripcion from departamento order by dep_des";
+                             $resDepa=$this->funciones->queryGeneral($sqlDepa);
+
+
+                             $sqlLugares="SELECT id,descripcion from capital_intermedia_rural where estado=1 and id_tipo=1 order by id";
+                             $resLugares=$this->funciones->queryGeneral($sqlLugares);
+                             $sqlLugaresIntermedia="SELECT id,descripcion from capital_intermedia_rural where estado=1 and id_tipo=2 order by descripcion";
+                             $resLugaresIntermedia=$this->funciones->queryGeneral($sqlLugaresIntermedia);
+                             $sqlLugaresRural="SELECT id,descripcion from capital_intermedia_rural where estado=1 and id_tipo=3 order by descripcion";
+                             $resLugaresRural=$this->funciones->queryGeneral($sqlLugaresRural);
+                                
+
+
+
                              $cols=0;
                              $sql="SELECT v.id,v.descripcion,(SELECT precio_bruto from via_item_localidad where id_tipo_localidad=v.id and id_item=1) as precio_bruto FROM via_tipo_localidad v where v.estado=1;";
                              $res=$this->funciones->queryGeneral($sql);
                              foreach ($res->result() as $row) {
                               $cols++;
-                                ?><th><small>DIAS<br><?=$row->descripcion?></small><br><?=number_format($row->precio_bruto,2,'.',',')." Bs."?><input type="hidden" id="localidad_<?=$row->id?>" name="localidad_<?=$row->id?>" value="<?=$row->precio_bruto?>"></th><?php
+                                ?><th><small>DIAS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><?=$row->descripcion?></small><br><?=number_format($row->precio_bruto,2,'.',',')." Bs."?><input type="hidden" id="localidad_<?=$row->id?>" name="localidad_<?=$row->id?>" value="<?=$row->precio_bruto?>">
+                                  </th><?php
                              }
                              ?>
                              <th>COSTO<br>TOTAL</th>
@@ -280,8 +321,30 @@ function calcularMontosPerNocte(){
                               <td><?=$eqt->numero_ci?></td>
                               <?php
                               foreach ($res->result() as $row) {
-                                $diasConf=$this->funciones->obtenerCantidadSolDetalleMontos($sol,$eqt->id_persona,$row->id,1);
-                                ?><td><input type="number" class="form-control perdiem" name="dias_<?=$row->id?>_<?=$eqt->id_persona?>" id="dias_<?=$row->id?>_<?=$eqt->id_persona?>" value="<?=$diasConf?>" onchange="calcularMontosPerdiem();" onkeyup="calcularMontosPerdiem()"></td><?php
+                                $dataFind=$this->funciones->obtenerCantidadSolDetalleMontos($sol,$eqt->id_persona,$row->id,1);
+                                $diasConf=$dataFind[0];
+                                $lugarConf=$dataFind[1];
+                                ?><td><input type="number" class="form-control perdiem" name="dias_<?=$row->id?>_<?=$eqt->id_persona?>" id="dias_<?=$row->id?>_<?=$eqt->id_persona?>" value="<?=$diasConf?>" onchange="calcularMontosPerdiem();" onkeyup="calcularMontosPerdiem()">
+                                  <select name="capital_<?=$row->id?>_<?=$eqt->id_persona?>" id="capital_<?=$row->id?>_<?=$eqt->id_persona?>" class="form-control selectpicker" style="background: #1f618d;color:white;">
+                                    <option value="0" selected>--NINGUNO--</option>
+                                    <?php 
+                                    $resultLugares=$resLugares;
+                                    switch ($row->id){
+                                      case '1': $resultLugares=$resLugares; break;
+                                      case '2': $resultLugares=$resLugaresIntermedia; break;
+                                      case '3': $resultLugares=$resLugaresRural; break;
+                                    }
+                                      foreach ($resultLugares->result() as $rowL) {
+                                        if($rowL->id==$lugarConf){
+                                          ?><option value="<?=$rowL->id?>" selected><?=$rowL->descripcion?></option><?php
+                                        }else{
+                                          ?><option value="<?=$rowL->id?>"><small><?=$rowL->descripcion?></small></option><?php  
+                                        }
+                                        
+                                      }
+                                    ?>                                      
+                                  </select>
+                                  </td><?php
                                }
                                ?>
                                <td><input type="text" readonly class="form-control" name="costo_<?=$eqt->id_persona?>" id="costo_<?=$eqt->id_persona?>" value=""></td>
@@ -312,18 +375,21 @@ function calcularMontosPerNocte(){
                              <th>
                                 <b>Nombres y Apellidos</b>
                              </th>                                                        
-                             <th><b>Regional</b></th>
+                             <!-- <th><b>Regional</b></th>
                              <th><b>Cargo</b></th>
-                             <th><b>Documento<br>Identidad</b></th>
+                             <th><b>Documento<br>Identidad</b></th> -->
                              <?php 
                              $cols=0;
-                             $sql="SELECT v.id,v.descripcion,(SELECT precio_bruto from via_item_localidad where id_tipo_localidad=v.id and id_item=2) as precio_bruto FROM via_tipo_localidad v where v.estado=1;";
+                             $sql="SELECT v.id,v.descripcion,(SELECT precio_bruto from via_item_localidad where id_tipo_localidad=v.id and id_item=2) as precio_bruto FROM via_tipo_localidad v where v.estado=1 and v.id=1;";
                              $res=$this->funciones->queryGeneral($sql);
                              foreach ($res->result() as $row) {
                               $cols++;
                                 ?><th><small>CANTIDAD<br><?=$row->descripcion?></small><br><?=number_format($row->precio_bruto,2,'.',',')." Bs."?><input type="hidden" id="localidada_<?=$row->id?>" name="localidada_<?=$row->id?>" value="<?=$row->precio_bruto?>"></th><?php
                              }
                              ?>
+                             <th>ORIGEN</th>
+                             <th>DESTINO</th>
+                             <th>FECHA Y HORA</th>
                              <th>COSTO<br>TOTAL</th>
                              <?php 
                              $sql="SELECT id,descripcion,porcentaje FROM via_retenciones where estado=1;";
@@ -342,15 +408,103 @@ function calcularMontosPerNocte(){
                               <tr>
                               
                               <td><?=$eqt->nombre_persona?> <?=$eqt->apellido_persona?></td>
-                              <td><?=$eqt->nombre_regional?></td>
+                              <!-- <td><?=$eqt->nombre_regional?></td>
                               <td><?=$eqt->nombre_cargo?></td>
-                              <td><?=$eqt->numero_ci?></td>
+                              <td><?=$eqt->numero_ci?></td> -->
                               <?php
                               foreach ($res->result() as $row) {
-                                $diasConf=$this->funciones->obtenerCantidadSolDetalleMontos($sol,$eqt->id_persona,$row->id,2);
-                                ?><td><input type="number" class="form-control aereo" name="diasa_<?=$row->id?>_<?=$eqt->id_persona?>" id="diasa_<?=$row->id?>_<?=$eqt->id_persona?>" value="<?=$diasConf?>" onchange="calcularMontosAereo();" onkeyup="calcularMontosAereo()"></td><?php
-                               }
+                                $dataFind=$this->funciones->obtenerCantidadSolDetalleMontos($sol,$eqt->id_persona,$row->id,2);
+                                $diasConf=$dataFind[0];
+                                $lugarConf=$dataFind[2];
+                                $lugaraConf=$dataFind[4];
+                                $lugarConf2=$dataFind[3];
+                                $lugaraConf2=$dataFind[5];
+                                $lugarConf3=$dataFind[6];
+                                $lugarConf4=$dataFind[7];
+                                ?><td>
+                                  <select name="diasa_<?=$row->id?>_<?=$eqt->id_persona?>" id="diasa_<?=$row->id?>_<?=$eqt->id_persona?>" class="form-control selectpicker aereo" onchange="calcularMontosAereo();" style="background: #1f618d;color:white;">                                    
+                                    <?php 
+                                    for ($canti=0; $canti <=2; $canti++) { 
+                                      switch ($canti){
+                                        case 0:$descrip="NO";break;
+                                        case 1:$descrip="SALIDA";break;
+                                        case 2:$descrip="SALIDA / RETORNO";break;
+                                      }
+                                      if($canti==$diasConf){
+                                        ?><option value="<?=$canti?>" selected><?=$descrip?></option><?php
+                                      }else{
+                                        ?><option value="<?=$canti?>"><?=$descrip?></option><?php
+                                      }
+                                    }
+                                    ?>                                      
+                                  </select>
+                                  <!-- <input type="number" class="form-control aereo" name="diasa_<?=$row->id?>_<?=$eqt->id_persona?>" id="diasa_<?=$row->id?>_<?=$eqt->id_persona?>" value="<?=$diasConf?>" onchange="calcularMontosAereo();" onkeyup="calcularMontosAereo()"> -->
+                                  </td><?php
+                               }                               
                                ?>
+                               <td>
+                                 <select name="origen_1_<?=$eqt->id_persona?>" id="origen_1_<?=$eqt->id_persona?>" class="form-control selectpicker" style="background: #1f618d;color:white;">
+                                    <option value="0" selected>--NINGUNO--</option>
+                                    <?php 
+                                    $resultLugares=$resDepa;
+                                      foreach ($resultLugares->result() as $rowL) {
+                                        if($rowL->id==$lugarConf){
+                                          ?><option value="<?=$rowL->id?>" selected><?=$rowL->descripcion?></option><?php
+                                        }else{
+                                          ?><option value="<?=$rowL->id?>"><small><?=$rowL->descripcion?></small></option><?php  
+                                        }
+                                        
+                                      }
+                                    ?>                                      
+                                  </select>
+                                  <select name="origena_1_<?=$eqt->id_persona?>" id="origena_1_<?=$eqt->id_persona?>" class="form-control selectpicker" style="background: #1f618d;color:white;">
+                                    <option value="0" selected>--NINGUNO--</option>
+                                    <?php 
+                                    $resultLugares=$resDepa;
+                                      foreach ($resultLugares->result() as $rowL) {
+                                        if($rowL->id==$lugaraConf){
+                                          ?><option value="<?=$rowL->id?>" selected><?=$rowL->descripcion?></option><?php
+                                        }else{
+                                          ?><option value="<?=$rowL->id?>"><small><?=$rowL->descripcion?></small></option><?php  
+                                        }
+                                        
+                                      }
+                                    ?>                                      
+                                  </select>
+                               </td>
+                               <td>
+                                 <select name="destino_1_<?=$eqt->id_persona?>" id="destino_1_<?=$eqt->id_persona?>" class="form-control selectpicker" style="background: #1f618d;color:white;">
+                                    <option value="0" selected>--NINGUNO--</option>
+                                    <?php 
+                                    $resultLugares=$resDepa;
+                                      foreach ($resultLugares->result() as $rowL) {
+                                        if($rowL->id==$lugarConf2){
+                                          ?><option value="<?=$rowL->id?>" selected><?=$rowL->descripcion?></option><?php
+                                        }else{
+                                          ?><option value="<?=$rowL->id?>"><small><?=$rowL->descripcion?></small></option><?php  
+                                        }
+                                        
+                                      }
+                                    ?>                                                                                                       
+                                  </select>
+                                  <select name="destinoa_1_<?=$eqt->id_persona?>" id="destinoa_1_<?=$eqt->id_persona?>" class="form-control selectpicker" style="background: #1f618d;color:white;">
+                                    <option value="0" selected>--NINGUNO--</option>
+                                    <?php 
+                                    $resultLugares=$resDepa;
+                                      foreach ($resultLugares->result() as $rowL) {
+                                        if($rowL->id==$lugaraConf2){
+                                          ?><option value="<?=$rowL->id?>" selected><?=$rowL->descripcion?></option><?php
+                                        }else{
+                                          ?><option value="<?=$rowL->id?>"><small><?=$rowL->descripcion?></small></option><?php  
+                                        }
+                                        
+                                      }
+                                    ?>                                                                                                       
+                                  </select>
+                               </td>
+                               <td><input type="datetime-local" name="fechavuelo_1_<?=$eqt->id_persona?>" id="fechavuelo_1_<?=$eqt->id_persona?>" value="<?=$lugarConf3?>" class="form-control"><input type="datetime-local" name="fechavueloa_1_<?=$eqt->id_persona?>" id="fechavueloa_1_<?=$eqt->id_persona?>" value="<?=$lugarConf4?>" class="form-control"></td>
+
+
                                <td><input type="text" readonly class="form-control" name="costoa_<?=$eqt->id_persona?>" id="costoa_<?=$eqt->id_persona?>" value=""></td>
                                <?php
                               foreach ($resRet->result() as $rowRet) {         
@@ -414,9 +568,31 @@ function calcularMontosPerNocte(){
                               <td><?=$eqt->nombre_cargo?></td>
                               <td><?=$eqt->numero_ci?></td>
                               <?php
-                              foreach ($res->result() as $row) {
-                                $diasConf=$this->funciones->obtenerCantidadSolDetalleMontos($sol,$eqt->id_persona,$row->id,3);
-                                ?><td><input type="number" class="form-control pernocte" name="diasp_<?=$row->id?>_<?=$eqt->id_persona?>" id="diasp_<?=$row->id?>_<?=$eqt->id_persona?>" value="<?=$diasConf?>" onchange="calcularMontosPerNocte();" onkeyup="calcularMontosPerNocte()"></td><?php
+                              foreach ($res->result() as $row) {                                
+                                $dataFind=$this->funciones->obtenerCantidadSolDetalleMontos($sol,$eqt->id_persona,$row->id,3);
+                                $diasConf=$dataFind[0];
+                                $lugarConf=$dataFind[1];
+                                ?><td><input type="number" class="form-control pernocte" name="diasp_<?=$row->id?>_<?=$eqt->id_persona?>" id="diasp_<?=$row->id?>_<?=$eqt->id_persona?>" value="<?=$diasConf?>" onchange="calcularMontosPerNocte();" onkeyup="calcularMontosPerNocte()">
+                                  <select name="lugarp_<?=$row->id?>_<?=$eqt->id_persona?>" id="lugarp_<?=$row->id?>_<?=$eqt->id_persona?>" class="form-control selectpicker" style="background: #1f618d;color:white;">
+                                    <option value="0" selected>--NINGUNO--</option>
+                                    <?php 
+                                    $resultLugares=$resLugares;
+                                    switch ($row->id){
+                                      case '1': $resultLugares=$resLugares; break;
+                                      case '2': $resultLugares=$resLugaresIntermedia; break;
+                                      case '3': $resultLugares=$resLugaresRural; break;
+                                    }
+                                      foreach ($resultLugares->result() as $rowL) {
+                                        if($rowL->id==$lugarConf){
+                                          ?><option value="<?=$rowL->id?>" selected><?=$rowL->descripcion?></option><?php
+                                        }else{
+                                          ?><option value="<?=$rowL->id?>"><small><?=$rowL->descripcion?></small></option><?php  
+                                        }
+                                        
+                                      }
+                                    ?>                                      
+                                  </select>
+                                  </td><?php
                                }
                                ?>
                                <td><input type="text" readonly class="form-control" name="costop_<?=$eqt->id_persona?>" id="costop_<?=$eqt->id_persona?>" value=""></td>

@@ -49,13 +49,18 @@ class Solicitud extends CI_Model{
 	public function updateTotal($ids,$monto){
 		$soli=$this->solicitud->getById($ids);
 		$total=$soli->total+$monto;
-		$sql = "update ".self::$tablename." set total=$total where id_sol=$ids";
+		$sql = "UPDATE solicitud s set total=(SELECT sum(monto) from sol_montos where id_sol=s.id_sol) where s.id_sol='$ids';";
 		$query = array($this->db->query($sql),'');
 	}
     public function updateTotalMenos($ids,$monto){
 		$soli=$this->solicitud->getById($ids);
 		$total=$soli->total-$monto;
-		$sql = "update ".self::$tablename." set total=$total where id_sol=$ids";
+		$sql = "UPDATE solicitud s set total=(SELECT sum(monto) from sol_montos where id_sol=s.id_sol) where s.id_sol='$ids';";
+		$query = array($this->db->query($sql),'');
+	}
+
+	public function updateTotalMonto($ids,$monto){		
+		$sql = "UPDATE solicitud s set total=(SELECT sum(monto) from sol_montos where id_sol=s.id_sol) where s.id_sol='$ids';";
 		$query = array($this->db->query($sql),'');
 	}
 //FUNCIONES QUE RETORNAN DE CONSULTA

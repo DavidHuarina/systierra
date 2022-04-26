@@ -111,9 +111,9 @@ class Cenviar_solicitud extends C_datos {
 		$id_p=$_REQUEST["idp"];
 		$sol=$_REQUEST["sol"];
 		$id_solm=$_REQUEST["s"];
-		$sm=$this->solm->getById($id_solm);
-		$this->solicitud->updateTotalMenos($sol,$sm->monto);
+		$sm=$this->solm->getById($id_solm);		
 		$this->solm->delete($id_solm);
+		$this->solicitud->updateTotalMenos($sol,$sm->monto);
 		redirect('cenviar_solicitud?id='.$id_p.'&ac='.$id_a.'&sol='.$sol);
 	}
 	function fin_sol(){
@@ -141,9 +141,10 @@ class Cenviar_solicitud extends C_datos {
 		$des=$this->input->post('des');
 		$tipoForm=$this->input->post('tipo_solicitud');
 		$ep=$this->ep->getByIdSF($s,$f);
-         
-         //if($this->solm->existe($ep->id_ep)->num==0){
-		if(!($ep==null||$ep==211)&&$tipoForm!=1){
+      $epGeneral=211;   
+      
+      $montoTotalSolicitud=0;   
+		if(!($ep==null||$ep==$epGeneral)&&$tipoForm!=1){
 			$ver=$this->solm->existe2($ep->id_ep,$sol);
 			if($ver->num==0){
               $solm=new Solm();
@@ -152,10 +153,10 @@ class Cenviar_solicitud extends C_datos {
 		        $solm->id_sol=$sol;
 		        $solm->descripcion=$des;
 		        $id=$solm->add();
+		        $montoTotalSolicitud+=$monto;   
 		        $this->solicitud->updateTotal($sol,$monto);
 			}            
-		}else{
-			$epGeneral=211;
+		}else{			
 
 			//BORRAR DETALLES
 			$sql="SELECT id_solm FROM sol_montos where id_sol='$sol' and id_via_item>0;";
@@ -191,8 +192,9 @@ class Cenviar_solicitud extends C_datos {
 	           foreach ($res->result() as $row) {
 	           		$montoItem=$this->input->post("localidad_".$row->id);
 	           		$cantidadItem=$this->input->post("dias_".$row->id."_".$per->id_persona); 
+	           		$idLugar=$this->input->post("capital_".$row->id."_".$per->id_persona); 
 	           		             		           	          		
-	           		$sqlInsert="INSERT INTO sol_montos_detalle_item(id_persona,id_via_localidad,id_via_item,id_sol_monto,monto,cantidad) VALUES ('$per->id_persona','$row->id','1','$id->id_solm','$montoItem','$cantidadItem')";
+	           		$sqlInsert="INSERT INTO sol_montos_detalle_item(id_persona,id_via_localidad,id_via_item,id_sol_monto,monto,cantidad,id_capital_int_rural) VALUES ('$per->id_persona','$row->id','1','$id->id_solm','$montoItem','$cantidadItem','$idLugar')";
 	         		$this->funciones->queryGeneral($sqlInsert);	         			         			
 	           }//for item         	
 	           $sqlInsert="INSERT INTO sol_montos_detalle_retencion(id_persona,id_via_retencion,id_via_item,id_sol_monto,monto,porcentaje) VALUES ('$per->id_persona','1','1','$id->id_solm','$montoRetencion','$porcentajeItem')";
@@ -200,6 +202,7 @@ class Cenviar_solicitud extends C_datos {
 	         }//for equipo
 	         $sqlUpdate="UPDATE sol_montos SET monto='".$this->input->post("total_perdiem")."' WHERE id_solm='$id->id_solm'";
 	         $this->funciones->queryGeneral($sqlUpdate);         
+	         $montoTotalSolicitud+=(float)$this->input->post("total_perdiem");   
          }
 
 
@@ -224,9 +227,28 @@ class Cenviar_solicitud extends C_datos {
            	  $porcentajeItem2=$this->input->post("reta_3"); 
 	           foreach ($res->result() as $row) {
 	           		$montoItem=$this->input->post("localidada_".$row->id);
-	           		$cantidadItem=$this->input->post("diasa_".$row->id."_".$per->id_persona); 
+	           		$cantidadItem=$this->input->post("diasa_".$row->id."_".$per->id_persona);
+	           		if($cantidadItem==""||$cantidadItem==null){
+	           			$cantidadItem=0;
+	           			$montoItem=0;
+	           		}
+	           		$origen=$this->input->post("origen_".$row->id."_".$per->id_persona);  
+	           		$origena=$this->input->post("origena_".$row->id."_".$per->id_persona);
+	           		$destino=$this->input->post("destino_".$row->id."_".$per->id_persona);  
+	           		$destinoa=$this->input->post("destinoa_".$row->id."_".$per->id_persona); 
+	           		$fechaviaje=$this->input->post("fechavuelo_".$row->id."_".$per->id_persona);  
+	           		$fechaviajea=$this->input->post("fechavueloa_".$row->id."_".$per->id_persona);  
+
+	           		if($cantidadItem==0){
+	           			$sqlInsert="INSERT INTO sol_montos_detalle_item(id_persona,id_via_localidad,id_via_item,id_sol_monto,monto,cantidad) VALUES ('$per->id_persona','$row->id','2','$id->id_solm','$montoItem','$cantidadItem')";	
+	           		}else if($cantidadItem==1){
+
+	           			$sqlInsert="INSERT INTO sol_montos_detalle_item(id_persona,id_via_localidad,id_via_item,id_sol_monto,monto,cantidad,id_origensalida,id_destinosalida,fechasalida) VALUES ('$per->id_persona','$row->id','2','$id->id_solm','$montoItem','$cantidadItem','$origen','$destino','$fechaviaje')";
+	           		}else{ //si es igual a 2
+	           			$sqlInsert="INSERT INTO sol_montos_detalle_item(id_persona,id_via_localidad,id_via_item,id_sol_monto,monto,cantidad,id_origensalida,id_destinosalida,fechasalida,id_origenvuelta,id_destinovuelta,fechavuelta) VALUES ('$per->id_persona','$row->id','2','$id->id_solm','$montoItem','$cantidadItem','$origen','$destino','$fechaviaje','$origena','$destinoa','$fechaviajea')";
+	           		}
 	           		            		           	          		
-	           		$sqlInsert="INSERT INTO sol_montos_detalle_item(id_persona,id_via_localidad,id_via_item,id_sol_monto,monto,cantidad) VALUES ('$per->id_persona','$row->id','2','$id->id_solm','$montoItem','$cantidadItem')";
+	           		//echo "<br>".$sqlInsert;
 	         		$this->funciones->queryGeneral($sqlInsert);	         			         			
 	           }//for item         	
 	           $sqlInsert="INSERT INTO sol_montos_detalle_retencion(id_persona,id_via_retencion,id_via_item,id_sol_monto,monto,porcentaje) VALUES ('$per->id_persona','2','2','$id->id_solm','$montoRetencion','$porcentajeItem')";
@@ -236,6 +258,7 @@ class Cenviar_solicitud extends C_datos {
 	         }//for equipo
 	         $sqlUpdate="UPDATE sol_montos SET monto='".$this->input->post("total_aereo")."' WHERE id_solm='$id->id_solm'";
 	         $this->funciones->queryGeneral($sqlUpdate);         
+	         $montoTotalSolicitud+=(float)$this->input->post("total_aereo");   
          }
 
 
@@ -257,18 +280,20 @@ class Cenviar_solicitud extends C_datos {
 	           foreach ($res->result() as $row) {
 	           		$montoItem=$this->input->post("localidadp_".$row->id);
 	           		$cantidadItem=$this->input->post("diasp_".$row->id."_".$per->id_persona); 
+	           		$idLugar=$this->input->post("lugarp_".$row->id."_".$per->id_persona); 
 	           		            		           	          		
-	           		$sqlInsert="INSERT INTO sol_montos_detalle_item(id_persona,id_via_localidad,id_via_item,id_sol_monto,monto,cantidad) VALUES ('$per->id_persona','$row->id','3','$id->id_solm','$montoItem','$cantidadItem')";
+	           		$sqlInsert="INSERT INTO sol_montos_detalle_item(id_persona,id_via_localidad,id_via_item,id_sol_monto,monto,cantidad,id_capital_int_rural) VALUES ('$per->id_persona','$row->id','3','$id->id_solm','$montoItem','$cantidadItem','$idLugar')";
 	         		$this->funciones->queryGeneral($sqlInsert);	         			         			
 	           }//for item         	
 	         }//for equipo
 	         $sqlUpdate="UPDATE sol_montos SET monto='".$this->input->post("total_pernocte")."' WHERE id_solm='$id->id_solm'";
-	         $this->funciones->queryGeneral($sqlUpdate);         
+	         $this->funciones->queryGeneral($sqlUpdate);    
+	         $montoTotalSolicitud+=(float)$this->input->post("total_pernocte");        
          }
 
 		}		           
          //}		       
-        
+      $this->solicitud->updateTotalMonto($sol,$montoTotalSolicitud);
         //$this->actividad->modificarEstado(3,$id_a);
 		redirect('cenviar_solicitud?id='.$id_p.'&ac='.$id_a.'&sol='.$sol);
 	}
